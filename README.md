@@ -4,7 +4,7 @@ The software that the group intends to develop aims to be a management system th
 The following are all the requirements that the application must meet:
 - At the start it will be possible to log in.
 - The user can request and cancel any type of booking, according to his needs.
-- The user will have the possibility to scroll through the list of the available services (the system will therefore take into account the accessibility of clinics and machinery).
+- The user will have the possibility to scroll through a list of all available services (the system will therefore take into account the accessibility of clinics and machinery).
 - Doctors will see their appointment list updated after each booking.
 - The admin can add and remove items from the various lists.
 - User-friendly interface.
