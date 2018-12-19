@@ -10,7 +10,7 @@ The following are all the requirements that the application must meet:
 - User-friendly interface.
 
 Optional features:
--The software will take care to occupy only the offices suitable for that specific visit. (eg an outpatient that can not be darkened will never be up to an ultrasound).
+- The software will take care to occupy only the offices suitable for that specific visit. (eg an outpatient that can not be darkened will never be up to an ultrasound).
 - View of the booking history.
 - Choice of interface language.
 
