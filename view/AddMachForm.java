@@ -1,0 +1,56 @@
+package view;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import util.Enums;
+
+public class AddMachForm extends JFrame {
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private int width = (int) screenSize.getWidth();
+    private int height = (int) screenSize.getHeight();
+    private GUI fac = new GUIFactory();
+    private String type;
+    private final Float font = 20.0f;
+   
+    public AddMachForm() {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        frame.setSize(width / 3, height / 3);
+        frame.setLocationByPlatform(true);
+        frame.setLayout(new BorderLayout());
+        frame.setTitle("Aggiungi macchiario");
+        frame.setResizable(false);
+
+        JPanel canvas = fac.createBoxPanel();
+        frame.add(canvas, BorderLayout.WEST);
+        JPanel canvas2 = fac.createBoxPanel();
+        frame.add(canvas2, BorderLayout.CENTER);
+        JPanel canvas3 = fac.createFlowPanel();
+        frame.add(canvas3,  BorderLayout.EAST);
+        
+        JLabel labelType = fac.createLabelRight("Tipo macchinario: ", font);
+        canvas.add(labelType);
+        JComboBox<String> textType = fac.createCombo(Enums.Sesso.getValoriSesso());
+        canvas2.add(textType);
+
+        JButton confirm = fac.createButton("Salva");
+        confirm.addActionListener(a -> {
+        	type = textType.getSelectedItem().toString();;
+        });
+        canvas3.add(confirm);
+        frame.setVisible(true);
+        frame.pack();
+    }
+}
