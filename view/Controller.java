@@ -11,45 +11,46 @@ public class Controller implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getActionCommand().equals("Lista prestazioni")){
+		switch (ae.getActionCommand()) {
+		case "Lista prestazioni":
 			Performances pe = new Performances();
 			pe.setVisible(true);
-			}
-		else if (ae.getActionCommand().equals("Aggiungi prestazione")){
+			break;
+		case "Aggiungi prestazione":
 			AddPerformanceForm apef = new AddPerformanceForm();
 			apef.setVisible(true);
-			}
-		else if(ae.getActionCommand().equals("Rimuovi prestazione")){
+			break;
+		case "Rimuovi prestazione":
 			RemovePerformanceForm rpef = new RemovePerformanceForm();
 			rpef.setVisible(true);
-			}
-		else if(ae.getActionCommand().equals("Aggiungi paziente")){
+		case "Aggiungi paziente":
 			AddPatientForm apaf = new AddPatientForm();
 			apaf.setVisible(true);
-			}
-		else if(ae.getActionCommand().equals("Rimuovi paziente")){
+			break;
+		case "Rimuovi paziente":
 			RemovePatientForm rpaf = new RemovePatientForm();
 			rpaf.setVisible(true);
-			}
-		else if(ae.getActionCommand().equals("Aggiungi dottore")){
+			break;
+		case "Aggiungi dottore":
 			AddDocForm adf = new AddDocForm();
 			adf.setVisible(true);
-			}
-		else if(ae.getActionCommand().equals("Rimuovi dottore")){
+			break;
+		case "Rimuovi dottore":
 			RemoveDocForm rdf = new RemoveDocForm();
 			rdf.setVisible(true);
-			}
-		else if(ae.getActionCommand().equals("Aggiungi macchinario")){
+			break;
+		case "Aggiungi macchinario":
 			AddMachForm amf = new AddMachForm();
 			amf.setVisible(true);
-			}
-		else if(ae.getActionCommand().equals("Rimuovi macchinario")){
+			break;
+		case "Rimuovi macchinario":
 			RemoveMachForm rmf = new RemoveMachForm();
 			rmf.setVisible(true);
-			}
-		else if(ae.getActionCommand().equals("Aggiungi ambulatorio")){
+			break;
+		case "Aggiungi ambulatorio":
 			AddAmbForm aaf = new AddAmbForm();
 			aaf.setVisible(true);
+			break;
 		}
 	}
 }

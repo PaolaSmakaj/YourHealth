@@ -1,8 +1,17 @@
 package view;
-import java.awt.*;
-import javax.swing.*;
 
-class Welcome extends JFrame {
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+class Welcome extends JFrame implements ActionListener {
     
     /**
 	 * 
@@ -10,94 +19,135 @@ class Welcome extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JButton addPerformance, removePerformance, addPatient, addDoctor, removePatient, removeDoctor, addMach, removeMach, addAmb, removeAmb;
     private static JButton performances, patients, doctors, mach, amb;
-    private static JFrame frame;
-    private static JPanel panel, center;
-    private JScrollPane scroll;
+    private static JPanel mainpanel, panel1, panel2, panel3, panel4, panel5, panel6;
     private GUIFactory factory = new GUIFactory();
 	private Controller contr;
-
-
-    public Welcome() {
+	private JFrame frame = new JFrame();
+    
+	public Welcome() {
 		try {
 			contr = new Controller(this);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 600);
-        frame.setVisible(true);
-        frame.setTitle("YourHealth");
-        frame.setLayout(new BorderLayout());
+		
 
-        panel = factory.createGridPanel();
-        frame.add(panel, BorderLayout.WEST);
-        center = factory.createBoxPanel();
-        scroll = factory.createScrollPane(center);
-        frame.add(scroll, BorderLayout.CENTER);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 500);
+        frame.setVisible(true);
+        frame.setTitle("Bentornato, Amministratore - YourHealth");
+        frame.setLayout(new BorderLayout());
+        //frame.getContentPane().setBackground(Color.cyan);
+        
+        mainpanel = new JPanel (new GridLayout(2,3));
+        frame.add(mainpanel, BorderLayout.CENTER);
+
+        panel1 = factory.createGridPanel();
         
         performances = factory.createButton("Lista prestazioni");
-        panel.add(performances);
+        performances.setBackground(Color.white);
+        panel1.add(performances);
 		performances.addActionListener(contr);
         addPerformance = factory.createButton("Aggiungi prestazione");
-        panel.add(addPerformance);
+        addPerformance.setBackground(Color.white);
+        panel1.add(addPerformance);
 		addPerformance.addActionListener(contr); 			
         removePerformance = factory.createButton("Rimuovi prestazione");
-        panel.add(removePerformance);
-		removePerformance.addActionListener(contr);	
+        removePerformance.setBackground(Color.white);
+        panel1.add(removePerformance);
+		removePerformance.addActionListener(contr);
         
-        JSeparator sep0 = factory.createSep();
-        panel.add(sep0);
+		mainpanel.add(panel1, BorderLayout.WEST);
+        
+		panel2 = factory.createGridPanel();
         
         patients = factory.createButton("Lista pazienti");
-        panel.add(patients);
+        patients.setBackground(Color.lightGray);
+        panel2.add(patients);
 		patients.addActionListener(contr);
         addPatient = factory.createButton("Aggiungi paziente");
-        panel.add(addPatient);
+        addPatient.setBackground(Color.lightGray);
+        panel2.add(addPatient);
 		addPatient.addActionListener(contr);
         removePatient = factory.createButton("Rimuovi paziente");
-        panel.add(removePatient);
-		removePatient.addActionListener(contr);	
+        removePatient.setBackground(Color.lightGray);
+        panel2.add(removePatient);
+		removePatient.addActionListener(contr);
+		
+		mainpanel.add(panel2);
 
-        JSeparator sep1 = factory.createSep();
-        panel.add(sep1);
+		panel3 = factory.createGridPanel();
         
         doctors = factory.createButton("Lista dottori");
-        panel.add(doctors);
+        doctors.setBackground(Color.white);
+        panel3.add(doctors);
 		doctors.addActionListener(contr);
         addDoctor = factory.createButton("Aggiungi dottore");
-        panel.add(addDoctor);
+        addDoctor.setBackground(Color.white);
+        panel3.add(addDoctor);
 		addDoctor.addActionListener(contr);	
         removeDoctor = factory.createButton("Rimuovi dottore");
-        panel.add(removeDoctor);
+        removeDoctor.setBackground(Color.white);
+        panel3.add(removeDoctor);
 		removeDoctor.addActionListener(contr);	
+		
+		mainpanel.add(panel3);
         
-        JSeparator sep2 = factory.createSep();
-        panel.add(sep2);
+		panel4 = factory.createGridPanel();
         
         mach = factory.createButton("Lista macchinari");
-        panel.add(mach);
+        mach.setBackground(Color.lightGray);
+        panel4.add(mach);
 		mach.addActionListener(contr);
 		addMach = factory.createButton("Aggiungi macchinario");
-        panel.add(addMach);
+		addMach.setBackground(Color.lightGray);
+        panel4.add(addMach);
 		addMach.addActionListener(contr);
         removeMach = factory.createButton("Rimuovi macchinario");
-        panel.add(removeMach);
+        removeMach.setBackground(Color.lightGray);
+        panel4.add(removeMach);
 		removeMach.addActionListener(contr);
         frame.setVisible(true);
+        
+        mainpanel.add(panel4);
        
-        JSeparator sep3 = factory.createSep();
-        panel.add(sep3);
+        panel5 = factory.createGridPanel();
         
         amb = factory.createButton("Lista ambulatori");
-        panel.add(amb);
+        amb.setBackground(Color.white);
+        panel5.add(amb);
 		amb.addActionListener(contr);
 		addAmb = factory.createButton("Aggiungi ambulatorio");
-        panel.add(addAmb);
+		addAmb.setBackground(Color.white);
+        panel5.add(addAmb);
 		addAmb.addActionListener(contr);
         removeAmb = factory.createButton("Rimuovi ambulatorio");
-        panel.add(removeAmb);
+        removeAmb.setBackground(Color.white);
+        panel5.add(removeAmb);
 		removeAmb.addActionListener(contr);
         frame.setVisible(true);
+        
+        mainpanel.add(panel5);
+        
+        panel6 = new JPanel();
+        
+        JButton logout = new JButton("Esci");
+        logout.setFont(new Font("Calibri", Font.PLAIN,18));
+        logout.setBackground(Color.darkGray);
+        logout.setForeground(Color.white);
+        panel6.add(logout);
+        logout.addActionListener(this);
+        frame.setVisible(true);
+        
+        mainpanel.add(panel6);
         }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		LoginForm login = new LoginForm();
+	    login.setVisible(true);
+	    frame.setVisible(false);
+		
+	}
 }

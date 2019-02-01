@@ -1,8 +1,11 @@
 package view;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
-class WelcomePatient extends JFrame {
+class WelcomePatient extends JFrame implements ActionListener {
 
     /**
 	 * 
@@ -10,8 +13,7 @@ class WelcomePatient extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static JButton performances, profile;
     private static JFrame frame;
-    private static JPanel panel, center;
-    private JScrollPane scroll;
+    private static JPanel mainpanel, panel1, panel2;
     private GUIFactory factory = new GUIFactory();
 	private ControllerPatient contrpatient;
 
@@ -20,33 +22,53 @@ class WelcomePatient extends JFrame {
 		try {
 			contrpatient = new ControllerPatient(this);
 		} catch(Exception e) {
-			//PROVA
 			e.printStackTrace();
 		}
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(700, 600);
+        frame.setSize(400, 200);
         frame.setVisible(true);
-        frame.setTitle("YourHealth");
+        frame.setTitle("Bentornato - YourHealth");
         frame.setLayout(new BorderLayout());
 
-        panel = factory.createGridPanel();
-        frame.add(panel, BorderLayout.WEST);
-        center = factory.createBoxPanel();
-        scroll = factory.createScrollPane(center);
-        frame.add(scroll, BorderLayout.CENTER);
+        mainpanel = new JPanel (new GridLayout(2,1));
+        frame.add(mainpanel, BorderLayout.CENTER);
         
-        performances = factory.createButton("Lista prestazione");
-        panel.add(performances);
-        JSeparator sep0 = factory.createSep();
-        panel.add(sep0);
+        panel1 = new JPanel (new GridLayout());
         
+        performances = factory.createButton("Lista prestazioni");
+        performances.setBackground(Color.white);
+        panel1.add(performances);
+      //performances contrpatient
         profile = factory.createButton("Profilo");
-        panel.add(profile);
+        profile.setBackground(Color.lightGray);
+        panel1.add(profile);
         profile.addActionListener(contrpatient);
         
+        mainpanel.add(panel1);
+        
+        panel2= new JPanel();
+        
+        JButton logout = new JButton("Esci");
+        logout.setFont(new Font("Calibri", Font.PLAIN,18));
+        logout.setBackground(Color.darkGray);
+        logout.setForeground(Color.white);
+        panel2.add(logout);
+        logout.addActionListener(this);
         frame.setVisible(true);
+        
+        mainpanel.add(panel2);
+        }
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		LoginForm login = new LoginForm();
+	    login.setVisible(true);
+	    frame.setVisible(false);
+		
+	}
        
-    }
+
     
 }

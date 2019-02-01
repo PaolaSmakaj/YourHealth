@@ -29,15 +29,6 @@ public interface GUI {
 
     /**
      * 
-     * @param comp
-     * the component to be put inside the scrollable panel.
-     * @return
-     * returns a JScrollPane containing comp.
-     */
-    JScrollPane createScrollPane(JComponent comp);
-
-    /**
-     * 
      * @param text
      * the text of the button.
      * @return

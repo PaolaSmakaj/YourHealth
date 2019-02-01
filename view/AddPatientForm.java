@@ -23,8 +23,10 @@ public class AddPatientForm extends JFrame {
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
     private GUI fac = new GUIFactory();
-    private String name, surname, codFis, sex;
-    private int age;
+    @SuppressWarnings("unused")
+	private String name, surname, codFis, sex;
+    @SuppressWarnings("unused")
+	private int age;
     private final Float font = 20.0f;
    
     public AddPatientForm() {
@@ -77,10 +79,9 @@ public class AddPatientForm extends JFrame {
                 sex = textSex.getSelectedItem().toString();
                 age = Integer.parseInt(textAge.getText());
     
-                //MainGUI.createPatient(name, surname, codFis, sex, disease, age, priority);
                 JOptionPane.showMessageDialog(frame, "Elemento aggiunto correttamente");
                 frame.dispose();
-                //MainGUI.refreshWaiting();
+                
             } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(frame, "Età non valida");
             } catch (IllegalArgumentException e) {
