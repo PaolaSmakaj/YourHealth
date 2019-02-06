@@ -1,6 +1,8 @@
 package view;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
@@ -94,7 +96,10 @@ public class AddPerformanceForm extends JFrame {
         JComboBox<String> textTypeAmb = fac.createCombo(Enums.Sesso.getValoriSesso());
         canvas2.add(textTypeAmb);
 
-        JButton confirm = fac.createButton("Salva");
+        JButton confirm = new JButton("Salva");
+        confirm.setFont(new Font("Calibri", Font.PLAIN,18));
+        confirm.setBackground(Color.darkGray);
+        confirm.setForeground(Color.white);
         confirm.addActionListener(a -> {
             try {
                 patName = textPatName.getText();
@@ -108,10 +113,9 @@ public class AddPerformanceForm extends JFrame {
                 typeMach = textTypeMach.getSelectedItem().toString();
                 typeAmb = textTypeMach.getSelectedItem().toString();
     
-                //MainGUI.createPatient(name, surname, codFis, sex, disease, age, priority);
                 JOptionPane.showMessageDialog(frame, "Prestazione aggiunta correttamente");
                 frame.dispose();
-                //MainGUI.refreshWaiting();
+               
             } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(frame, "Età non valida");
             } catch (IllegalArgumentException e) {

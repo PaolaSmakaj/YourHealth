@@ -1,6 +1,8 @@
 package view;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
@@ -23,9 +25,7 @@ public class AddPatientForm extends JFrame {
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
     private GUI fac = new GUIFactory();
-    @SuppressWarnings("unused")
 	private String name, surname, codFis, sex;
-    @SuppressWarnings("unused")
 	private int age;
     private final Float font = 20.0f;
    
@@ -70,7 +70,10 @@ public class AddPatientForm extends JFrame {
         JComboBox<String> textSex = fac.createCombo(Enums.Sesso.getValoriSesso());
         canvas2.add(textSex);
 
-        JButton confirm = fac.createButton("Salva");
+        JButton confirm = new JButton("Salva");
+        confirm.setFont(new Font("Calibri", Font.PLAIN,18));
+        confirm.setBackground(Color.darkGray);
+        confirm.setForeground(Color.white);
         confirm.addActionListener(a -> {
             try {
                 name = textName.getText();

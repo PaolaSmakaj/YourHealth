@@ -1,6 +1,8 @@
 package view;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JButton;
@@ -80,8 +82,10 @@ public class AddDocForm extends JFrame {
         JComboBox<String> textSpec = fac.createCombo(Enums.Ruolo.getValoriRuolo());
         canvas2.add(textSpec);
 
-        //confirm button
-        JButton confirm = fac.createButton("Salva");
+        JButton confirm = new JButton("Salva");
+        confirm.setFont(new Font("Calibri", Font.PLAIN,18));
+        confirm.setBackground(Color.darkGray);
+        confirm.setForeground(Color.white);
         confirm.addActionListener(a -> {
             try {
                 name = textName.getText();
