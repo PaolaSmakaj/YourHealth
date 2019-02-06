@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.Clinica;
+import controller.Admin;
 import model.Macchinario;
 import model.MacchinarioImpl;
 import util.Enums;
@@ -69,7 +69,7 @@ public class AddMachForm extends JFrame {
         	Macchinario M = new MacchinarioImpl(id, type);
         	
         	try {
-				Clinica.addMacchinario(M);
+				Admin.addMacchinario(M);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

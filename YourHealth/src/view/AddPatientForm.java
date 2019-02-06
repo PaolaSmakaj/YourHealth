@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.Clinica;
+import controller.Admin;
 import model.Paziente;
 import model.PazienteImpl;
 import util.Enums;
@@ -105,7 +105,7 @@ public class AddPatientForm extends JFrame {
                 frame.dispose();
                 Paziente P = new PazienteImpl(name, surname, sex, luogonascita, datanascita,
 						codFis, residenza);
-				Clinica.addPaziente(P);
+				Admin.addPaziente(P);
                 
             } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(frame, "Età non valida");

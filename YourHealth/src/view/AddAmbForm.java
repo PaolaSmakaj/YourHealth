@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.Clinica;
+import controller.Admin;
 import model.Ambulatorio;
 import model.AmbulatorioImpl;
 import util.Enums;
@@ -51,7 +51,7 @@ public class AddAmbForm extends JFrame {
         
         JLabel labelType = fac.createLabelRight("Tipo Ambulatorio: ", font);
         canvas.add(labelType);
-        JComboBox<String> textType = fac.createCombo(Enums.Sesso.getValoriSesso());
+        JComboBox<String> textType = fac.createCombo(Enums.TipoAmbulatorio.getValoriTipoAmbulatorio());
         canvas2.add(textType);
 
         JButton confirm = new JButton("Salva");
@@ -64,7 +64,7 @@ public class AddAmbForm extends JFrame {
         	
         	Ambulatorio A = new AmbulatorioImpl(id, type);
         	try {
-				Clinica.addAmbulatorio(A);
+				Admin.addAmbulatorio(A);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

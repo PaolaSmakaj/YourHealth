@@ -16,10 +16,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import controller.Clinica;
+import controller.Admin;
 import model.Prestazione;
 import model.PrestazioneImpl;
 import util.Enums;
+import util.Enums.Stato;
+import util.Enums.TipoPrestazione;
 
 public class AddPerformanceForm extends JFrame {
 
@@ -32,7 +34,9 @@ public class AddPerformanceForm extends JFrame {
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
     private GUI fac = new GUIFactory();
-    private String codFis, tipo, stato, Mach, Amb;
+    private String codFis, Mach, Amb;
+    private TipoPrestazione tipo;
+    private Stato stato;
     private int tesserinoDottore;
 	private LocalDate data;
 	private LocalTime ora;
@@ -103,8 +107,8 @@ public class AddPerformanceForm extends JFrame {
             	
                 codFis = textCodFis.getText();
                 tesserinoDottore = Integer.parseInt(textDoc.getText());
-                tipo = textType.getSelectedItem().toString();
-                stato = textStatus.getSelectedItem().toString();
+                tipo =  Enums.TipoPrestazione.getFromString(textType.getSelectedItem().toString());
+                stato = Enums.Stato.getFromString(textStatus.getSelectedItem().toString());
                 data = LocalDate.parse(textDate.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 ora = LocalTime.parse(textTime.getText(), DateTimeFormatter.ofPattern("HH:mm"));;
                 Mach = textMach.getText();
@@ -112,9 +116,9 @@ public class AddPerformanceForm extends JFrame {
     
                 JOptionPane.showMessageDialog(frame, "Prestazione aggiunta correttamente");
                 frame.dispose();
-                Prestazione P = new PrestazioneImpl(codFis, tesserinoDottore, Enums.TipoPrestazione.getFromString(tipo),
-                		data, ora, Enums.Stato.getFromString(stato), Mach, Amb);
-                Clinica.addPrestazione(P);
+                Prestazione P = new PrestazioneImpl(codFis, tesserinoDottore, tipo,
+                		data, ora, stato, Mach, Amb);
+                Admin.addPrestazione(P);
                
             } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(frame, "Età non valida");
