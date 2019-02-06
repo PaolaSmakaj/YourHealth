@@ -78,18 +78,18 @@ public class LoginForm extends JFrame implements ActionListener{
 		@SuppressWarnings("deprecation")
 		String pass = p1.getText();
 		if(uname.equals("admin@admin.com") && pass.equals("abc@123")){
-			Welcome wel = new Welcome();
-			wel.setVisible(true);
+			new Welcome();
+			//wel.setVisible(true);
 			frame.setVisible(false);
 		}
 		else if (uname.equals("doc@doc.com") && pass.equals("abc@123")){
-			WelcomeDoc weldoc = new WelcomeDoc();
-			weldoc.setVisible(true);
+			new WelcomeDoc();
+			//weldoc.setVisible(true);
 			frame.setVisible(false);
 		}
 		else if (uname.equals("patient@patient.com") && pass.equals("abc@123")){
-			WelcomePatient welpatient = new WelcomePatient();
-			welpatient.setVisible(true);
+			new WelcomePatient();
+			//welpatient.setVisible(true);
 			frame.setVisible(false);
 		}
 		else {
@@ -98,7 +98,7 @@ public class LoginForm extends JFrame implements ActionListener{
 		}
 	}
 
-	public static void main(String[] args){
+	/*public static void main(String[] args){
 		new LoginForm();
-	}
+	}*/
 }

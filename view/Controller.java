@@ -13,43 +13,33 @@ public class Controller implements ActionListener {
 	public void actionPerformed(ActionEvent ae) {
 		switch (ae.getActionCommand()) {
 		case "Lista prestazioni":
-			Performances pe = new Performances();
-			pe.setVisible(true);
+			new Performances();
 			break;
 		case "Aggiungi prestazione":
-			AddPerformanceForm apef = new AddPerformanceForm();
-			apef.setVisible(true);
+			new AddPerformanceForm();
 			break;
 		case "Rimuovi prestazione":
-			RemovePerformanceForm rpef = new RemovePerformanceForm();
-			rpef.setVisible(true);
+			new RemovePerformanceForm();
 		case "Aggiungi paziente":
-			AddPatientForm apaf = new AddPatientForm();
-			apaf.setVisible(true);
+			new AddPatientForm();
 			break;
 		case "Rimuovi paziente":
-			RemovePatientForm rpaf = new RemovePatientForm();
-			rpaf.setVisible(true);
+			new RemovePatientForm();
 			break;
 		case "Aggiungi dottore":
-			AddDocForm adf = new AddDocForm();
-			adf.setVisible(true);
+			new AddDocForm();
 			break;
 		case "Rimuovi dottore":
-			RemoveDocForm rdf = new RemoveDocForm();
-			rdf.setVisible(true);
+			new RemoveDocForm();
 			break;
 		case "Aggiungi macchinario":
-			AddMachForm amf = new AddMachForm();
-			amf.setVisible(true);
+			new AddMachForm();
 			break;
 		case "Rimuovi macchinario":
-			RemoveMachForm rmf = new RemoveMachForm();
-			rmf.setVisible(true);
+			new RemoveMachForm();
 			break;
 		case "Aggiungi ambulatorio":
-			AddAmbForm aaf = new AddAmbForm();
-			aaf.setVisible(true);
+			new AddAmbForm();
 			break;
 		}
 	}
