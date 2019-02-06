@@ -16,7 +16,7 @@ public class LoginForm extends JFrame implements ActionListener{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 426996786500293573L;
 	private static JLabel l1, l2, l3;
 	private static JTextField tf1;
 	private static JButton btn1;

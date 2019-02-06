@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import util.Enums;
 
 public class AddAmbForm extends JFrame {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -5890537905190128886L;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();

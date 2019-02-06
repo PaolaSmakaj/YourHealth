@@ -10,7 +10,7 @@ class WelcomePatient extends JFrame implements ActionListener {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 7831774295466009148L;
 	private static JButton performances, profile;
     private static JFrame frame;
     private static JPanel mainpanel, panel1, panel2;

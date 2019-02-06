@@ -20,7 +20,7 @@ public class AddPerformanceForm extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2970713926117414003L;
 	
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();

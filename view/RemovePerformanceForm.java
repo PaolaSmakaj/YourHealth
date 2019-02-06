@@ -6,6 +6,6 @@ public class RemovePerformanceForm extends JFrame {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -6274630894009026575L;
 
 }

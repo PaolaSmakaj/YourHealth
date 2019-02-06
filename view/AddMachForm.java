@@ -18,7 +18,7 @@ public class AddMachForm extends JFrame {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -3612704906615612092L;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();

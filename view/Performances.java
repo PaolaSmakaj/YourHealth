@@ -6,6 +6,6 @@ public class Performances extends JFrame{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7033684337462412628L;
 
 }

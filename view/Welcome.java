@@ -12,11 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 class Welcome extends JFrame implements ActionListener {
-    
-    /**
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 8948126197209198029L;
 	private JButton addPerformance, removePerformance, addPatient, addDoctor, removePatient, removeDoctor, addMach, removeMach, addAmb, removeAmb;
     private static JButton performances, patients, doctors, mach, amb;
     private static JPanel mainpanel, panel1, panel2, panel3, panel4, panel5, panel6;

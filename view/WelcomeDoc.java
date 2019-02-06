@@ -16,7 +16,7 @@ class WelcomeDoc extends JFrame implements ActionListener {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 351308251796592971L;
 	private static JButton performances, profile;
     private static JFrame frame;
     private static JPanel mainpanel, panel1, panel2;

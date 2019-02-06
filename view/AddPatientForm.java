@@ -20,7 +20,7 @@ public class AddPatientForm extends JFrame {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -697684912603915024L;
 	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
