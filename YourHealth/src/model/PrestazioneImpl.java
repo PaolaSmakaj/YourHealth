@@ -19,7 +19,7 @@ public class PrestazioneImpl implements Prestazione, Serializable {
 	private final String macchinario;
 	private final String ambulatorio;
 
-	private PrestazioneImpl(final String paziente, final int dottore, final TipoPrestazione tipo, final LocalDate data,
+	public PrestazioneImpl(final String paziente, final int dottore, final TipoPrestazione tipo, final LocalDate data,
 			final LocalTime ora, final Stato stato, final String macchinario, final String ambulatorio) {
 		this.cfPaziente = paziente;
 		this.tesserinoDottore = dottore;

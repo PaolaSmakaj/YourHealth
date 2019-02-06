@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -12,14 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 
 import controller.Clinica;
 import model.Paziente;
 import model.PazienteImpl;
 import util.Enums;
+import util.Enums.Sesso;
 
 public class AddPatientForm extends JFrame {
 
@@ -31,7 +31,8 @@ public class AddPatientForm extends JFrame {
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
     private GUI fac = new GUIFactory();
-	private String name, surname, codFis, sex, luogonascita, residenza;
+    private String name, surname, codFis, luogonascita, residenza;
+    private Sesso sex;
 	private LocalDate datanascita;
     private final Float font = 20.0f;
    
@@ -92,18 +93,17 @@ public class AddPatientForm extends JFrame {
         confirm.setForeground(Color.white);
         confirm.addActionListener(a -> {
             try {
-            	name = textName.getText();
-				surname = textSurname.getText();
-				codFis = textCodFis.getText();
-				sex = textSex.getSelectedItem().toString();
-				datanascita = LocalDate.parse(textDataNascita.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                name = textName.getText();
+                surname = textSurname.getText();
+                codFis = textCodFis.getText();
+                sex = Enums.Sesso.getFromString(textSex.getSelectedItem().toString());
 				luogonascita = textLuogoNascita.getText();
+                datanascita = LocalDate.parse(textDataNascita.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 				residenza = textResidenza.getText();
     
                 JOptionPane.showMessageDialog(frame, "Elemento aggiunto correttamente");
                 frame.dispose();
-                
-                Paziente P = new PazienteImpl(name, surname, Enums.Sesso.getFromString(sex), luogonascita, datanascita,
+                Paziente P = new PazienteImpl(name, surname, sex, luogonascita, datanascita,
 						codFis, residenza);
 				Clinica.addPaziente(P);
                 

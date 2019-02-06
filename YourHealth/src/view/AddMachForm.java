@@ -10,8 +10,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import controller.Clinica;
+import model.Macchinario;
+import model.MacchinarioImpl;
 import util.Enums;
+import util.Enums.TipoMacchinario;
 
 public class AddMachForm extends JFrame {
 
@@ -23,7 +28,8 @@ public class AddMachForm extends JFrame {
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
     private GUI fac = new GUIFactory();
-    private String type;
+    private TipoMacchinario type;
+    private String id;
     private final Float font = 20.0f;
    
     public AddMachForm() {
@@ -42,9 +48,14 @@ public class AddMachForm extends JFrame {
         JPanel canvas3 = fac.createFlowPanel();
         frame.add(canvas3,  BorderLayout.EAST);
         
+        JLabel labelId = fac.createLabelRight("Codice: ", font);
+        canvas.add(labelId);
+        JTextField textId = fac.createTextField();
+        canvas2.add(textId);
+        
         JLabel labelType = fac.createLabelRight("Tipo macchinario: ", font);
         canvas.add(labelType);
-        JComboBox<String> textType = fac.createCombo(Enums.Sesso.getValoriSesso());
+        JComboBox<String> textType = fac.createCombo(Enums.TipoMacchinario.getValoriTipoMacchinario());
         canvas2.add(textType);
 
         JButton confirm = new JButton("Salva");
@@ -52,7 +63,17 @@ public class AddMachForm extends JFrame {
         confirm.setBackground(Color.darkGray);
         confirm.setForeground(Color.white);
         confirm.addActionListener(a -> {
-        	type = textType.getSelectedItem().toString();;
+        	type = Enums.TipoMacchinario.getFromString(textType.getSelectedItem().toString());
+        	id = textId.getText();
+        	
+        	Macchinario M = new MacchinarioImpl(id, type);
+        	
+        	try {
+				Clinica.addMacchinario(M);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+        	
         });
         canvas3.add(confirm);
         frame.setVisible(true);

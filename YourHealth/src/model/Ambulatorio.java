@@ -12,7 +12,7 @@ public interface Ambulatorio {
 	/**
 	 * type getter
 	 * 
-	 * @return treatment room's suitability
+	 * @return treatment room's type
 	 */
-	String getAbilitazione();
+	String getTipo();
 }

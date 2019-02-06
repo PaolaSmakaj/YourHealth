@@ -102,7 +102,7 @@ public class Clinica {
 		return null;
 	}
 
-	public void addDottore(Dottore D) throws Exception {
+	public static void addDottore(Dottore D) throws Exception {
 		try {
 			Connection con = getConnection();
 			PreparedStatement posted = con.prepareStatement("INSERT INTO dottori (Nome,Cognome) VALUES ('" + D.getNome()
@@ -153,7 +153,7 @@ public class Clinica {
 		return null;
 	}
 
-	public void addMacchinario(Macchinario M) throws Exception {
+	public static void addMacchinario(Macchinario M) throws Exception {
 		try {
 			Connection con = getConnection();
 			PreparedStatement posted = con
@@ -186,7 +186,8 @@ public class Clinica {
 
 			ArrayList<Macchinario> array = new ArrayList<Macchinario>();
 			while (result.next()) {
-				Macchinario M = new MacchinarioImpl.Builder().codice(result.getString(1)).tipo(result.getString(2))
+				Macchinario M = new MacchinarioImpl.Builder().codice(result.getString(1))
+						.tipo(Enums.TipoMacchinario.getFromString(result.getString(2)))
 						.build();
 				array.add(M);
 			}
@@ -199,12 +200,12 @@ public class Clinica {
 		return null;
 	}
 
-	public void addAmbulatorio(Ambulatorio A) throws Exception {
+	public static void addAmbulatorio(Ambulatorio A) throws Exception {
 		try {
 			Connection con = getConnection();
 			PreparedStatement posted = con
 					.prepareStatement("INSERT INTO ambulatori (Codice,Abilitazione,Disponibilità) VALUES ('"
-							+ A.getCodice() + "'," + " '" + A.getAbilitazione() + "')");
+							+ A.getCodice() + "'," + " '" + A.getTipo() + "')");
 
 			posted.executeUpdate();
 		} catch (SQLException e) {
@@ -233,7 +234,7 @@ public class Clinica {
 			ArrayList<Ambulatorio> array = new ArrayList<Ambulatorio>();
 			while (result.next()) {
 				Ambulatorio A = new AmbulatorioImpl.Builder().codice(result.getString(1))
-						.abilitazione(result.getString(2)).build();
+						.tipo(Enums.TipoAmbulatorio.getFromString(result.getString(2))).build();
 				array.add(A);
 			}
 			System.out.println("Lista Ambulatori Selezionata");
@@ -245,7 +246,7 @@ public class Clinica {
 		return null;
 	}
 
-	public void addPrestazione(Prestazione Pr) throws Exception {
+	public static void addPrestazione(Prestazione Pr) throws Exception {
 		try {
 			Connection con = getConnection();
 			PreparedStatement posted = con.prepareStatement(

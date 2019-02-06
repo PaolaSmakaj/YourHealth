@@ -10,8 +10,13 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import controller.Clinica;
+import model.Ambulatorio;
+import model.AmbulatorioImpl;
 import util.Enums;
+import util.Enums.TipoAmbulatorio;
 
 public class AddAmbForm extends JFrame {
 	private static final long serialVersionUID = -5890537905190128886L;
@@ -19,7 +24,8 @@ public class AddAmbForm extends JFrame {
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
     private GUI fac = new GUIFactory();
-    private String type;
+    private TipoAmbulatorio type;
+    private String id;
     private final Float font = 20.0f;
    
     public AddAmbForm() {
@@ -38,7 +44,12 @@ public class AddAmbForm extends JFrame {
         JPanel canvas3 = fac.createFlowPanel();
         frame.add(canvas3,  BorderLayout.EAST);
         
-        JLabel labelType = fac.createLabelRight("Tipo ambulatorio: ", font);
+        JLabel labelId = fac.createLabelRight("Codice: ", font);
+        canvas.add(labelId);
+        JTextField textId = fac.createTextField();
+        canvas2.add(textId);
+        
+        JLabel labelType = fac.createLabelRight("Tipo Ambulatorio: ", font);
         canvas.add(labelType);
         JComboBox<String> textType = fac.createCombo(Enums.Sesso.getValoriSesso());
         canvas2.add(textType);
@@ -48,7 +59,15 @@ public class AddAmbForm extends JFrame {
         confirm.setBackground(Color.darkGray);
         confirm.setForeground(Color.white);
         confirm.addActionListener(a -> {
-        	type = textType.getSelectedItem().toString();;
+        	type = Enums.TipoAmbulatorio.getFromString(textType.getSelectedItem().toString());
+        	id = textId.getText();
+        	
+        	Ambulatorio A = new AmbulatorioImpl(id, type);
+        	try {
+				Clinica.addAmbulatorio(A);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
         });
         canvas3.add(confirm);
         frame.setVisible(true);

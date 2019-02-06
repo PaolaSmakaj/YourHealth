@@ -340,5 +340,143 @@ public class Enums {
             return r;
         }
     }
+    /**
+     * Tipo Macchinario.
+     */
+    public enum TipoMacchinario {
+        /**
+         * 
+         */
+        ECOGRAFO("Ecografo"),
+        /**
+         * 
+         */
+        TAC("Tac"),
+        /**
+         * 
+         */
+        RISONANZA("Risonanza"),
+        /**
+         * 
+         */
+        ENDOSCOPIO("Endoscopio");
+
+        private final String tipomacchinario;
+
+        // Reverse-lookup map
+        private static final Map<String, TipoMacchinario> LOOKUP = new HashMap<String, TipoMacchinario>();
+
+        static {
+            for (final TipoMacchinario p : TipoMacchinario.values()) {
+                LOOKUP.put(p.getTipoMacchinario(), p);
+            }
+        }
+
+        TipoMacchinario(final String tipomacchinario) {
+            this.tipomacchinario = tipomacchinario;
+        }
+        
+        /**
+         * returns all elements of the enum in string form.
+         * @return array of strings
+         */
+        public static String[] getValoriTipoMacchinario() {
+            final List<String>  arr = new ArrayList<>();
+            for (final TipoMacchinario elem : TipoMacchinario.values()) {
+                arr.add(elem.tipomacchinario);
+            }
+            return arr.toArray(new String[0]);
+        }
+        
+        /**
+         * machine type getter.
+         * @return tipomacchinario
+         */
+        public String getTipoMacchinario() {
+            return tipomacchinario;
+        }
+        
+        /**
+         * returns a machine type from its string value.
+         * @param tipomacchinario p
+         * @return tipomacchinario
+         */
+        public static TipoMacchinario getFromString(final String tipomacchinario) {
+            final TipoMacchinario p = LOOKUP.get(tipomacchinario);
+            if (p == null) {
+                throw new IllegalArgumentException("Tipo Macchinario non valido: " + tipomacchinario);
+            } 
+            return p;
+        }
+    }
+    /**
+     * Tipo Ambulatorio.
+     */
+    public enum TipoAmbulatorio {
+        /**
+         * 
+         */
+        ORTOPEDIA("Ortopedia"),
+        /**
+         * 
+         */
+        ECOGRAFIA("Ecografia"),
+        /**
+         * 
+         */
+        RISONANZA("Risonanza"),
+        /**
+         * 
+         */
+        OCULISTA("Oculista");
+
+        private final String tipoambulatorio;
+
+        // Reverse-lookup map
+        private static final Map<String, TipoAmbulatorio> LOOKUP = new HashMap<String, TipoAmbulatorio>();
+
+        static {
+            for (final TipoAmbulatorio p : TipoAmbulatorio.values()) {
+                LOOKUP.put(p.getTipoAmbulatorio(), p);
+            }
+        }
+
+        TipoAmbulatorio(final String tipoambulatorio) {
+            this.tipoambulatorio = tipoambulatorio;
+        }
+        
+        /**
+         * returns all elements of the enum in string form.
+         * @return array of strings
+         */
+        public static String[] getValoriTipoAmbulatorio() {
+            final List<String>  arr = new ArrayList<>();
+            for (final TipoAmbulatorio elem : TipoAmbulatorio.values()) {
+                arr.add(elem.tipoambulatorio);
+            }
+            return arr.toArray(new String[0]);
+        }
+        
+        /**
+         * machine type getter.
+         * @return tipoAmbulatorio
+         */
+        public String getTipoAmbulatorio() {
+            return tipoambulatorio;
+        }
+        
+        /**
+         * returns a machine type from its string value.
+         * @param tipoAmbulatorio p
+         * @return tipoAmbulatorio
+         */
+        public static TipoAmbulatorio getFromString(final String tipoambulatorio) {
+            final TipoAmbulatorio p = LOOKUP.get(tipoambulatorio);
+            if (p == null) {
+                throw new IllegalArgumentException("Tipo Ambulatorio non valido: " + tipoambulatorio);
+            } 
+            return p;
+        }
+    }
 }
 

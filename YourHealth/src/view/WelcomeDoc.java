@@ -69,8 +69,7 @@ class WelcomeDoc extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		LoginForm login = new LoginForm();
-	    login.setVisible(true);
+		new LoginForm();
 	    frame.setVisible(false);
 		
 	}

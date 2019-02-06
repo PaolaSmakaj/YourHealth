@@ -91,7 +91,7 @@ public class ControllerImpl implements Controller {
 
 			ResultSet result = statement.executeQuery();
 
-			Macchinario M = new MacchinarioImpl.Builder().codice(result.getString(1)).tipo(result.getString(2)).build();
+			Macchinario M = new MacchinarioImpl.Builder().codice(result.getString(1)).tipo(Enums.TipoMacchinario.getFromString(result.getString(2))).build();
 			return M;
 
 		} catch (Exception e) {
@@ -108,7 +108,8 @@ public class ControllerImpl implements Controller {
 
 			ResultSet result = statement.executeQuery();
 
-			Ambulatorio A = new AmbulatorioImpl.Builder().codice(result.getString(1)).abilitazione(result.getString(2))
+			Ambulatorio A = new AmbulatorioImpl.Builder().codice(result.getString(1))
+					.tipo(Enums.TipoAmbulatorio.getFromString(result.getString(2)))
 					.build();
 			return A;
 

@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,7 +16,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.Clinica;
+import model.Dottore;
+import model.DottoreImpl;
 import util.Enums;
+import util.Enums.Ruolo;
+import util.Enums.Sesso;
 
 /**
  *  Class to add a doctor to the hospital.
@@ -28,8 +36,13 @@ public class AddDocForm extends JFrame {
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
     private GUI fac = new GUIFactory();
-    private String name, surname, codFis, sex, spec;
-    private int age;
+    private String nome, cognome, luogonascita;
+    private Sesso sesso;
+    private int tesserino;
+    private LocalDate datanascita;
+    private Ruolo ruolo;
+    private LocalTime orarioinizio, orariofine;
+    
     private final float font = 20.0f;
     /**
      * 
@@ -61,26 +74,41 @@ public class AddDocForm extends JFrame {
         canvas.add(labelSurname);
         JTextField textSurname = fac.createTextField();
         canvas2.add(textSurname);
-
-        JLabel labelCodFis = fac.createLabelRight("Codice fiscale: ", font);
-        canvas.add(labelCodFis);
-        JTextField textCodFis = fac.createTextField();
-        canvas2.add(textCodFis);
-
-        JLabel labelAge = fac.createLabelRight("Età: ", font);
-        canvas.add(labelAge);
-        JTextField textAge = fac.createTextField();
-        canvas2.add(textAge);
-
+        
         JLabel labelSex = fac.createLabelRight("Sesso: ", font);
         canvas.add(labelSex);
         JComboBox<String> textSex = fac.createCombo(Enums.Sesso.getValoriSesso());
         canvas2.add(textSex);
+        
+        JLabel labelLuogoNascita = fac.createLabelRight("Luogo Nascita: ", font);
+		canvas.add(labelLuogoNascita);
+		JTextField textLuogoNascita = fac.createTextField();
+		canvas2.add(textLuogoNascita);
+
+		JLabel labelDataNascita = fac.createLabelRight("Data Nascita: ", font);
+		canvas.add(labelDataNascita);
+		JTextField textDataNascita = fac.createTextField();
+		canvas2.add(textDataNascita);
+
+        JLabel labelId = fac.createLabelRight("Tesserino: ", font);
+        canvas.add(labelId);
+        JTextField textId = fac.createTextField();
+        canvas2.add(textId);
 
         JLabel labelSpec = fac.createLabelRight("Ruolo: ", font);
         canvas.add(labelSpec);
         JComboBox<String> textSpec = fac.createCombo(Enums.Ruolo.getValoriRuolo());
         canvas2.add(textSpec);
+        
+        JLabel labelOrarioInizio = fac.createLabelRight("Orario Inizio: ", font);
+		canvas.add(labelOrarioInizio);
+		JTextField textOrarioInizio = fac.createTextField();
+		canvas2.add(textOrarioInizio);
+		
+		JLabel labelOrarioFine = fac.createLabelRight("Orario Fine: ", font);
+		canvas.add(labelOrarioFine);
+		JTextField textOrarioFine = fac.createTextField();
+		canvas2.add(textOrarioFine);
 
         JButton confirm = new JButton("Salva");
         confirm.setFont(new Font("Calibri", Font.PLAIN,18));
@@ -88,23 +116,31 @@ public class AddDocForm extends JFrame {
         confirm.setForeground(Color.white);
         confirm.addActionListener(a -> {
             try {
-                name = textName.getText();
-                surname = textSurname.getText();
-                codFis = textCodFis.getText();
-                sex = textSex.getSelectedItem().toString();
-                age = Integer.parseInt(textAge.getText());
-                spec = textSpec.getSelectedItem().toString();
-                // DA FARE! Welcome.(name, surname, codFis, sex, age, spec);
+                nome = textName.getText();
+                cognome = textSurname.getText();
+                sesso = Enums.Sesso.getFromString(textSex.getSelectedItem().toString());
+				luogonascita = textLuogoNascita.getText();
+                datanascita = LocalDate.parse(textDataNascita.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                tesserino = Integer.parseInt(textId.getText());
+                ruolo = Enums.Ruolo.getFromString(textSpec.getSelectedItem().toString());
+                orarioinizio = LocalTime.parse(textOrarioInizio.getText(), DateTimeFormatter.ofPattern("HH/mm"));
+                orariofine = LocalTime.parse(textOrarioFine.getText(), DateTimeFormatter.ofPattern("HH/mm"));
+                
                 JOptionPane.showMessageDialog(frame, "Elemento aggiunto correttamente");
                 frame.dispose();
-                // DA FARE! MainGUI.refreshDoctors();
+                
+                Dottore D = new DottoreImpl(nome, cognome, sesso, luogonascita, datanascita, tesserino, ruolo, orarioinizio, orariofine);
+                Clinica.addDottore(D);
+                
             } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(frame, "Età non valida");
             } catch (IllegalArgumentException e) {
                 JOptionPane.showMessageDialog(frame, e.getMessage());
             } catch (IllegalStateException e) {
                 JOptionPane.showMessageDialog(frame, e.getMessage());
-            }
+            } catch (Exception e) {
+				e.printStackTrace();
+			}
         });
         canvas3.add(confirm);
         frame.setVisible(true);

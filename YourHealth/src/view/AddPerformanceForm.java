@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,6 +16,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.Clinica;
+import model.Prestazione;
+import model.PrestazioneImpl;
 import util.Enums;
 
 public class AddPerformanceForm extends JFrame {
@@ -26,8 +32,10 @@ public class AddPerformanceForm extends JFrame {
     private int width = (int) screenSize.getWidth();
     private int height = (int) screenSize.getHeight();
     private GUI fac = new GUIFactory();
-    private String patName, patSurname, codFis, sex, docName, docSurname, spec, typeMach, typeAmb;
-    private int age;
+    private String codFis, tipo, stato, Mach, Amb;
+    private int tesserinoDottore;
+	private LocalDate data;
+	private LocalTime ora;
     private final Float font = 20.0f;
    
     public AddPerformanceForm() {
@@ -46,55 +54,45 @@ public class AddPerformanceForm extends JFrame {
         JPanel canvas3 = fac.createFlowPanel();
         frame.add(canvas3,  BorderLayout.EAST);
 
-        JLabel labelPatName = fac.createLabelRight("Nome paziente: ", font);
-        canvas.add(labelPatName);
-        JTextField textPatName = fac.createTextField();
-        canvas2.add(textPatName);
-
-        JLabel labelPatSurname = fac.createLabelRight("Cognome paziente: ", font);
-        canvas.add(labelPatSurname);
-        JTextField textPatSurname = fac.createTextField();
-        canvas2.add(textPatSurname);
-
         JLabel labelCodFis = fac.createLabelRight("Codice fiscale: ", font);
         canvas.add(labelCodFis);
         JTextField textCodFis = fac.createTextField();
         canvas2.add(textCodFis);
 
-        JLabel labelAge = fac.createLabelRight("Età: ", font);
-        canvas.add(labelAge);
-        JTextField textAge = fac.createTextField();
-        canvas2.add(textAge);
-
-        JLabel labelSex = fac.createLabelRight("Sesso: ", font);
-        canvas.add(labelSex);
-        JComboBox<String> textSex = fac.createCombo(Enums.Sesso.getValoriSesso());
-        canvas2.add(textSex);
+        JLabel labelDoc = fac.createLabelRight("Tesserino dottore: ", font);
+        canvas.add(labelDoc);
+        JTextField textDoc = fac.createTextField();
+        canvas2.add(textDoc);
         
-        JLabel labelDocName = fac.createLabelRight("Nome dottore: ", font);
-        canvas.add(labelDocName);
-        JTextField textDocName = fac.createTextField();
-        canvas2.add(textDocName);
-
-        JLabel labelDocSurname = fac.createLabelRight("Cognome dottore: ", font);
-        canvas.add(labelDocSurname);
-        JTextField textDocSurname = fac.createTextField();
-        canvas2.add(textDocSurname);
+        JLabel labelType = fac.createLabelRight("Tipo Prestazione: ", font);
+		canvas.add(labelType);
+		JComboBox<String> textType = fac.createCombo(Enums.TipoPrestazione.getValoriPrestazioni());
+		canvas2.add(textType);
+		
+		JLabel labelStatus = fac.createLabelRight("Stato Prestazione: ", font);
+		canvas.add(labelStatus);
+		JComboBox<String> textStatus = fac.createCombo(Enums.Stato.getValoriStato());
+		canvas2.add(textStatus);
+		
+		JLabel labelDate = fac.createLabelRight("Data Prestazione: ", font);
+		canvas.add(labelDate);
+		JTextField textDate = fac.createTextField();
+		canvas2.add(textDate);
+		
+		JLabel labelTime = fac.createLabelRight("Ora Prestazione: ", font);
+		canvas.add(labelTime);
+		JTextField textTime = fac.createTextField();
+		canvas2.add(textTime);
         
-        JLabel labelSpec = fac.createLabelRight("Ruolo: ", font);
-        canvas.add(labelSpec);
-        JComboBox<String> textSpec = fac.createCombo(Enums.Ruolo.getValoriRuolo());
-        canvas2.add(textSpec);
+        JLabel labelMach = fac.createLabelRight("Macchinario: ", font);
+        canvas.add(labelMach);
+        JTextField textMach = fac.createTextField();
+        canvas2.add(textMach);
         
-        JLabel labelTypeMach = fac.createLabelRight("Tipo macchinario: ", font);
-        canvas.add(labelTypeMach);
-        JComboBox<String> textTypeMach = fac.createCombo(Enums.Sesso.getValoriSesso());
-        canvas2.add(textTypeMach);
-        
-        JLabel labelTypeAmb = fac.createLabelRight("Tipo ambulatorio: ", font);
-        canvas.add(labelTypeAmb);
-        JComboBox<String> textTypeAmb = fac.createCombo(Enums.Sesso.getValoriSesso());
-        canvas2.add(textTypeAmb);
+        JLabel labelAmb = fac.createLabelRight("Ambulatorio: ", font);
+        canvas.add(labelAmb);
+        JTextField textAmb = fac.createTextField();
+        canvas2.add(textAmb);
 
         JButton confirm = new JButton("Salva");
         confirm.setFont(new Font("Calibri", Font.PLAIN,18));
@@ -102,19 +100,21 @@ public class AddPerformanceForm extends JFrame {
         confirm.setForeground(Color.white);
         confirm.addActionListener(a -> {
             try {
-                patName = textPatName.getText();
-                patSurname = textPatSurname.getText();
+            	
                 codFis = textCodFis.getText();
-                sex = textSex.getSelectedItem().toString();
-                age = Integer.parseInt(textAge.getText());
-                docName = textDocName.getText();
-                docSurname = textDocSurname.getText();
-                spec = textSpec.getSelectedItem().toString();
-                typeMach = textTypeMach.getSelectedItem().toString();
-                typeAmb = textTypeMach.getSelectedItem().toString();
+                tesserinoDottore = Integer.parseInt(textDoc.getText());
+                tipo = textType.getSelectedItem().toString();
+                stato = textStatus.getSelectedItem().toString();
+                data = LocalDate.parse(textDate.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                ora = LocalTime.parse(textTime.getText(), DateTimeFormatter.ofPattern("HH:mm"));;
+                Mach = textMach.getText();
+                Amb = textAmb.getText();
     
                 JOptionPane.showMessageDialog(frame, "Prestazione aggiunta correttamente");
                 frame.dispose();
+                Prestazione P = new PrestazioneImpl(codFis, tesserinoDottore, Enums.TipoPrestazione.getFromString(tipo),
+                		data, ora, Enums.Stato.getFromString(stato), Mach, Amb);
+                Clinica.addPrestazione(P);
                
             } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(frame, "Età non valida");
@@ -122,7 +122,9 @@ public class AddPerformanceForm extends JFrame {
                 JOptionPane.showMessageDialog(frame, e.getMessage());
             } catch (IllegalStateException e) {
                 JOptionPane.showMessageDialog(frame, e.getMessage());
-            }
+            } catch(Exception e) {
+				e.printStackTrace();
+			}
         });
         canvas3.add(confirm);
         frame.setVisible(true);
