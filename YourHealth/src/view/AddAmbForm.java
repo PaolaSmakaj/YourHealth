@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -61,6 +62,8 @@ public class AddAmbForm extends JFrame {
         confirm.addActionListener(a -> {
         	type = Enums.TipoAmbulatorio.getFromString(textType.getSelectedItem().toString());
         	id = textId.getText();
+        	JOptionPane.showMessageDialog(frame, "Elemento aggiunto correttamente");
+            frame.dispose();
         	
         	Ambulatorio A = new AmbulatorioImpl(id, type);
         	try {

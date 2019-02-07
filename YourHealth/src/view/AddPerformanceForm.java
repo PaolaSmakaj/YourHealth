@@ -73,6 +73,7 @@ public class AddPerformanceForm extends JFrame {
 		JComboBox<String> textType = fac.createCombo(Enums.TipoPrestazione.getValoriPrestazioni());
 		canvas2.add(textType);
 		
+		//TODO forse questa andrebbe tolta e settiamo direttamente lo stato in prenotata visto che è la creazione
 		JLabel labelStatus = fac.createLabelRight("Stato Prestazione: ", font);
 		canvas.add(labelStatus);
 		JComboBox<String> textStatus = fac.createCombo(Enums.Stato.getValoriStato());
@@ -108,6 +109,7 @@ public class AddPerformanceForm extends JFrame {
                 codFis = textCodFis.getText();
                 tesserinoDottore = Integer.parseInt(textDoc.getText());
                 tipo =  Enums.TipoPrestazione.getFromString(textType.getSelectedItem().toString());
+                //TODO cambiare?
                 stato = Enums.Stato.getFromString(textStatus.getSelectedItem().toString());
                 data = LocalDate.parse(textDate.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 ora = LocalTime.parse(textTime.getText(), DateTimeFormatter.ofPattern("HH:mm"));;
