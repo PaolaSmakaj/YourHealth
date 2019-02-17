@@ -1,63 +1,48 @@
 package view;
+
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Admin;
-import model.Prestazione;
+import model.Macchinario;
 
-public class Performances extends JFrame{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7033684337462412628L;
-    private static final int NUM_COLS_PERFORMANCES = 8;
-    private javax.swing.JScrollPane jScrollPane1;
+public class Machines extends JFrame {
+	private static final long serialVersionUID = 3069897876783372139L;
+	private static final int NUM_COLS_MACHINES = 2;
+	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JTable jTable1;
-	
-	public Performances() {
 
-		
-        try {
-			ArrayList<Prestazione> list = Admin.getListaPrestazioni();
-	        
+	public Machines() {
+
+		try {
+			ArrayList<Macchinario> list = Admin.getListaMacchinari();
+
 			initComponents();
 			DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-	        addRowToPerformanceTable(model, list);
-	        
-	        this.setVisible(true);
-	        
+			addRowToPerformanceTable(model, list);
+
+			this.setVisible(true);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
+
 	}
-	
-	
-	
-	public void addRowToPerformanceTable(DefaultTableModel model, ArrayList<Prestazione> list)
-    {     
-        Object rowData[] = new Object[NUM_COLS_PERFORMANCES];
-        for(int i = 0; i < list.size(); i++)
-        {
-            rowData[0] = list.get(i).getPaziente();
-            rowData[1] = list.get(i).getDottore();
-            rowData[2] = list.get(i).getTipo();
-            rowData[3] = list.get(i).getData();
-            rowData[4] = list.get(i).getOra();
-            rowData[5] = list.get(i).getStato();
-            rowData[6] = list.get(i).getMacchinario();
-            rowData[7] = list.get(i).getAmbulatorio();
-            model.addRow(rowData);
-        }
-                
-    }
-	
-	
+
+	public void addRowToPerformanceTable(DefaultTableModel model, ArrayList<Macchinario> list) {
+		Object rowData[] = new Object[NUM_COLS_MACHINES];
+		for (int i = 0; i < list.size(); i++) {
+			rowData[0] = list.get(i).getCodice();
+			rowData[1] = list.get(i).getTipo();
+			model.addRow(rowData);
+		}
+
+	}
+
 	private void initComponents() {
-		
+
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTable1 = new javax.swing.JTable();
 
@@ -65,7 +50,7 @@ public class Performances extends JFrame{
 
 		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-		}, new String[] { "Paziente", "Dottore", "Tipo", "Data", "Ora", "Stato", "Macchinario", "Ambulatorio" }));
+		}, new String[] { "Codice", "Tipo" }));
 		jScrollPane1.setViewportView(jTable1);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -83,4 +68,5 @@ public class Performances extends JFrame{
 
 		pack();
 	}
+
 }

@@ -123,8 +123,8 @@ public class AddDocForm extends JFrame {
                 datanascita = LocalDate.parse(textDataNascita.getText(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 tesserino = Integer.parseInt(textId.getText());
                 ruolo = Enums.Ruolo.getFromString(textSpec.getSelectedItem().toString());
-                orarioinizio = LocalTime.parse(textOrarioInizio.getText(), DateTimeFormatter.ofPattern("HH/mm"));
-                orariofine = LocalTime.parse(textOrarioFine.getText(), DateTimeFormatter.ofPattern("HH/mm"));
+                orarioinizio = LocalTime.parse(textOrarioInizio.getText(), DateTimeFormatter.ofPattern("HH:mm"));
+                orariofine = LocalTime.parse(textOrarioFine.getText(), DateTimeFormatter.ofPattern("HH:mm"));
                 
                 JOptionPane.showMessageDialog(frame, "Elemento aggiunto correttamente");
                 frame.dispose();

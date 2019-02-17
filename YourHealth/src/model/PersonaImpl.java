@@ -119,9 +119,4 @@ public class PersonaImpl implements Persona, Serializable {
 		return this.datanascita;
 	}
 
-	@Override
-	public String toString() {
-		return this.nome + ", " + this.cognome + ", " + this.sesso + ", " + this.luogonascita + ", " + this.datanascita;
-	}
-
 }

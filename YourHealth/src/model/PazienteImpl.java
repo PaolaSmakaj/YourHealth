@@ -102,9 +102,4 @@ public final class PazienteImpl extends PersonaImpl.Builder implements Paziente,
 		return this.datanascita;
 	}
 
-	@Override
-	public String toString() {
-		return this.nome + ", " + this.cognome + ", " + this.sesso + ", " + this.luogonascita + ", " + this.datanascita;
-	}
-
 }

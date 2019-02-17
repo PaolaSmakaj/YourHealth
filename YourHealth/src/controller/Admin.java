@@ -39,12 +39,12 @@ public class Admin {
 		}
 	}
 
-	public void removePaziente(String codicefiscale) throws Exception {
+	public static void removePaziente(String codicefiscale) throws Exception {
 		try {
 			Connection con = Database.getConnection();
 			
 			PreparedStatement posted = con
-					.prepareStatement("DELETE FROM pazienti WHERE Codicefiscale = " + codicefiscale + "");
+					.prepareStatement("DELETE FROM pazienti WHERE Codicefiscale = '" + codicefiscale + "'");
 
 			posted.executeUpdate();
 		} catch (SQLException e) {
@@ -52,7 +52,7 @@ public class Admin {
 		}
 	}
 
-	public ArrayList<Paziente> getListaPazienti() throws Exception {
+	public static ArrayList<Paziente> getListaPazienti() throws Exception {
 		try {
 			Connection con = Database.getConnection();
 			
@@ -62,10 +62,10 @@ public class Admin {
 
 			ArrayList<Paziente> array = new ArrayList<Paziente>();
 			while (result.next()) {
-				Paziente P = new PazienteImpl(result.getString(1), result.getString(2),
-						Enums.Sesso.getFromString(result.getString(3)), result.getString(4),
-						LocalDate.parse(result.getString(5), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-						result.getString(6), result.getString(7));
+				Paziente P = new PazienteImpl(result.getString("Nome"), result.getString("Cognome"),
+						Enums.Sesso.getFromString(result.getString("Sesso")), result.getString("LuogoNascita"),
+						LocalDate.parse(result.getString("DataNascita"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+						result.getString("Codicefiscale"), result.getString("Residenza"));
 
 				array.add(P);
 			}
@@ -81,11 +81,6 @@ public class Admin {
 		try {
 			Connection con = Database.getConnection();
 			
-			System.out.println("Nome Paziente: " + D.getNome());
-			System.out.println("Cognome Paziente: " + D.getCognome());
-			System.out.println("Sesso Paziente: " + D.getSesso());
-			System.out.println("Luogo Nascita Paziente: " + D.getLuogoNascita());
-			System.out.println("Data Nascita Paziente: " + D.getDataNascita());
 			PreparedStatement posted = con.prepareStatement(
 					"INSERT INTO dottori (Nome,Cognome,Sesso,LuogoNascita,DataNascita,Tesserino,Ruolo,OrarioInizio,OrarioFine)"
 					+ " VALUES ('" + D.getNome() + "'," + " '" + D.getCognome() + "'," + " '" + D.getSesso() + "'," + " '" + D.getLuogoNascita()
@@ -98,7 +93,7 @@ public class Admin {
 		}
 	}
 
-	public void removeDottore(int tesserino) throws Exception {
+	public static void removeDottore(int tesserino) throws Exception {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement posted = con.prepareStatement("DELETE FROM dottori WHERE Tesserino = " + tesserino + "");
@@ -109,7 +104,7 @@ public class Admin {
 		}
 	}
 
-	public ArrayList<Dottore> getListaDottori() throws Exception {
+	public static ArrayList<Dottore> getListaDottori() throws Exception {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM dottori ORDER BY Cognome");
@@ -118,12 +113,12 @@ public class Admin {
 
 			ArrayList<Dottore> array = new ArrayList<Dottore>();
 			while (result.next()) {
-				Dottore D = new DottoreImpl(result.getString(1), result.getString(2),
-						Enums.Sesso.getFromString(result.getString(3)), result.getString(4),
-						LocalDate.parse(result.getString(5), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-						result.getInt(6), Enums.Ruolo.getFromString(result.getString(7)),
-						LocalTime.parse(result.getString(8), DateTimeFormatter.ofPattern("HH:mm")),
-						LocalTime.parse(result.getString(9), DateTimeFormatter.ofPattern("HH:mm")));
+				Dottore D = new DottoreImpl(result.getString("Nome"), result.getString("Cognome"),
+						Enums.Sesso.getFromString(result.getString("Sesso")), result.getString("LuogoNascita"),
+						LocalDate.parse(result.getString("DataNascita"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+						result.getInt("Tesserino"), Enums.Ruolo.getFromString(result.getString("Ruolo")),
+						LocalTime.parse(result.getString("OrarioInizio"), DateTimeFormatter.ofPattern("HH:mm")),
+						LocalTime.parse(result.getString("OrarioFine"), DateTimeFormatter.ofPattern("HH:mm")));
 				array.add(D);
 			}
 			System.out.println("Lista Dottori Selezionata");
@@ -148,10 +143,10 @@ public class Admin {
 		}
 	}
 
-	public void removeMacchinario(String codice) throws Exception {
+	public static void removeMacchinario(String codice) throws Exception {
 		try {
 			Connection con = Database.getConnection();
-			PreparedStatement posted = con.prepareStatement("DELETE FROM macchinari WHERE Codice = " + codice + "");
+			PreparedStatement posted = con.prepareStatement("DELETE FROM macchinari WHERE Codice = '" + codice + "'");
 
 			posted.executeUpdate();
 		} catch (SQLException e) {
@@ -159,7 +154,7 @@ public class Admin {
 		}
 	}
 
-	public ArrayList<Macchinario> getListaMacchinari() throws Exception {
+	public static ArrayList<Macchinario> getListaMacchinari() throws Exception {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM macchinari ORDER BY Tipo");
@@ -168,8 +163,8 @@ public class Admin {
 
 			ArrayList<Macchinario> array = new ArrayList<Macchinario>();
 			while (result.next()) {
-				Macchinario M = new MacchinarioImpl.Builder().codice(result.getString(1))
-						.tipo(Enums.TipoMacchinario.getFromString(result.getString(2)))
+				Macchinario M = new MacchinarioImpl.Builder().codice(result.getString("Codice"))
+						.tipo(Enums.TipoMacchinario.getFromString(result.getString("Tipo")))
 						.build();
 				array.add(M);
 			}
@@ -195,10 +190,10 @@ public class Admin {
 		}
 	}
 
-	public void removeAmbulatorio(String codice) throws Exception {
+	public static void removeAmbulatorio(String codice) throws Exception {
 		try {
 			Connection con = Database.getConnection();
-			PreparedStatement posted = con.prepareStatement("DELETE FROM ambulatori WHERE Codice = " + codice + "");
+			PreparedStatement posted = con.prepareStatement("DELETE FROM ambulatori WHERE Codice = '" + codice + "'");
 
 			posted.executeUpdate();
 		} catch (SQLException e) {
@@ -206,7 +201,7 @@ public class Admin {
 		}
 	}
 
-	public ArrayList<Ambulatorio> getListaAmbulatori() throws Exception {
+	public static ArrayList<Ambulatorio> getListaAmbulatori() throws Exception {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM ambulatori ORDER BY Tipo");
@@ -215,8 +210,8 @@ public class Admin {
 
 			ArrayList<Ambulatorio> array = new ArrayList<Ambulatorio>();
 			while (result.next()) {
-				Ambulatorio A = new AmbulatorioImpl.Builder().codice(result.getString(1))
-						.tipo(Enums.TipoAmbulatorio.getFromString(result.getString(2))).build();
+				Ambulatorio A = new AmbulatorioImpl.Builder().codice(result.getString("Codice"))
+						.tipo(Enums.TipoAmbulatorio.getFromString(result.getString("Tipo"))).build();
 				array.add(A);
 			}
 			System.out.println("Lista Ambulatori Selezionata");
@@ -242,19 +237,19 @@ public class Admin {
 		}
 	}
 
-	public void removePrestazione(String codicefiscale, int tesserino, LocalDate data, LocalTime ora) throws Exception {
+	public static void removePrestazione(String codicefiscale, int tesserino, LocalDate data, LocalTime ora) throws Exception {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement posted = con
-					.prepareStatement("DELETE FROM prestazioni WHERE CF_Paziente=" + codicefiscale + " and ID_Dottore ="
-							+ tesserino + " and Data = " + data.toString() + " and Ora = " + ora.toString() + "");
+					.prepareStatement("DELETE FROM prestazioni WHERE CF_Paziente='" + codicefiscale + "' and ID_Dottore ="
+							+ tesserino + " and Data = '" + data.toString() + "' and Ora = '" + ora.toString() + "'");
 			posted.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	public void changeStatoPrestazione(Stato stato, int id) {
+	public static void changeStatoPrestazione(Stato stato, int id) {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement posted = con
@@ -266,7 +261,7 @@ public class Admin {
 		}
 	}
 
-	public ArrayList<Prestazione> getListaPrestazioni() throws Exception {
+	public static ArrayList<Prestazione> getListaPrestazioni() throws Exception {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM prestazioni ORDER BY Data");
@@ -276,12 +271,12 @@ public class Admin {
 			ArrayList<Prestazione> array = new ArrayList<Prestazione>();
 			while (result.next()) {
 
-				Prestazione Pr = new PrestazioneImpl.Builder().paziente(result.getString(1)).dottore(result.getInt(2))
-						.tipoprestazione(Enums.TipoPrestazione.getFromString(result.getString(3)))
-						.data(LocalDate.parse(result.getString(4), DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-						.ora(LocalTime.parse(result.getString(5), DateTimeFormatter.ofPattern("HH:mm")))
-						.stato(Enums.Stato.getFromString(result.getString(6))).macchinario(result.getString(7))
-						.ambulatorio(result.getString(8)).build();
+				Prestazione Pr = new PrestazioneImpl.Builder().paziente(result.getString("CF_Paziente")).dottore(result.getInt("ID_Dottore"))
+						.tipoprestazione(Enums.TipoPrestazione.getFromString(result.getString("Tipo")))
+						.data(LocalDate.parse(result.getString("Data"), DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+						.ora(LocalTime.parse(result.getString("Ora"), DateTimeFormatter.ofPattern("HH:mm")))
+						.stato(Enums.Stato.getFromString(result.getString("Stato"))).macchinario(result.getString("Macchinario"))
+						.ambulatorio(result.getString("Ambulatorio")).build();
 
 				array.add(Pr);
 			}
@@ -294,7 +289,7 @@ public class Admin {
 		return null;
 	}
 	
-	public Paziente getPazienteFromDB(String codicefiscale) {
+	public static Paziente getPazienteFromDB(String codicefiscale) {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement statement = con
@@ -304,7 +299,7 @@ public class Admin {
 
 			Paziente P = new PazienteImpl(result.getString(1), result.getString(2),
 					Enums.Sesso.getFromString(result.getString(3)), result.getString(4),
-					LocalDate.parse(result.getString(5), DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+					LocalDate.parse(result.getString(5), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
 					result.getString(6), result.getString(7));
 			return P;
 
@@ -314,7 +309,7 @@ public class Admin {
 		return null;
 	}
 
-	public Dottore getDottoreFromDB(int tesserino) {
+	public static Dottore getDottoreFromDB(int tesserino) {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement statement = con
@@ -324,7 +319,7 @@ public class Admin {
 
 			Dottore D = new DottoreImpl(result.getString(1), result.getString(2),
 					Enums.Sesso.getFromString(result.getString(3)), result.getString(4),
-					LocalDate.parse(result.getString(5), DateTimeFormatter.ofPattern("dd/MM/yyyy")), result.getInt(6),
+					LocalDate.parse(result.getString(5), DateTimeFormatter.ofPattern("yyyy-MM-dd")), result.getInt(6),
 					Enums.Ruolo.getFromString(result.getString(7)),
 					LocalTime.parse(result.getString(8), DateTimeFormatter.ofPattern("HH:mm")),
 					LocalTime.parse(result.getString(9), DateTimeFormatter.ofPattern("HH:mm")));
@@ -336,14 +331,17 @@ public class Admin {
 		return null;
 	}
 
-	public Macchinario getMacchinarioFromDB(String codice) {
+	public static Macchinario getMacchinarioFromDB(String codice) {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM macchinari WHERE Codice=" + codice + "");
 
 			ResultSet result = statement.executeQuery();
 
-			Macchinario M = new MacchinarioImpl.Builder().codice(result.getString(1)).tipo(Enums.TipoMacchinario.getFromString(result.getString(2))).build();
+			Macchinario M = new MacchinarioImpl.Builder()
+					.codice(result.getString("Codice"))
+					.tipo(Enums.TipoMacchinario.getFromString(result.getString("Tipo")))
+					.build();
 			return M;
 
 		} catch (Exception e) {
@@ -352,15 +350,15 @@ public class Admin {
 		return null;
 	}
 
-	public Ambulatorio getAmbulatorioFromDB(String codice) {
+	public static Ambulatorio getAmbulatorioFromDB(String codice) {
 		try {
 			Connection con = Database.getConnection();
 			PreparedStatement statement = con.prepareStatement("SELECT * FROM ambulatori WHERE Codice=" + codice + "");
 
 			ResultSet result = statement.executeQuery();
 
-			Ambulatorio A = new AmbulatorioImpl.Builder().codice(result.getString(1))
-					.tipo(Enums.TipoAmbulatorio.getFromString(result.getString(2)))
+			Ambulatorio A = new AmbulatorioImpl.Builder().codice(result.getString("Codice"))
+					.tipo(Enums.TipoAmbulatorio.getFromString(result.getString("Tipo")))
 					.build();
 			return A;
 
@@ -370,7 +368,7 @@ public class Admin {
 		return null;
 	}
 
-	public boolean checkDisponibilit‡Prestazione(int tesserino, LocalDate data, LocalTime ora, String codiceMacch,
+	public static boolean checkDisponibilit‡Prestazione(int tesserino, LocalDate data, LocalTime ora, String codiceMacch,
 			String codiceAmb) {
 		try {
 			Connection con = Database.getConnection();
@@ -382,12 +380,12 @@ public class Admin {
 			ArrayList<Prestazione> array = new ArrayList<Prestazione>();
 			while (result.next()) {
 
-				Prestazione Pr = new PrestazioneImpl.Builder().paziente(result.getString(1)).dottore(result.getInt(2))
-						.tipoprestazione(Enums.TipoPrestazione.getFromString(result.getString(3)))
-						.data(LocalDate.parse(result.getString(4), DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-						.ora(LocalTime.parse(result.getString(5), DateTimeFormatter.ofPattern("HH:mm")))
-						.stato(Enums.Stato.getFromString(result.getString(6))).macchinario(result.getString(7))
-						.ambulatorio(result.getString(8)).build();
+				Prestazione Pr = new PrestazioneImpl.Builder().paziente(result.getString("CF_Paziente")).dottore(result.getInt("ID_Dottore"))
+						.tipoprestazione(Enums.TipoPrestazione.getFromString(result.getString("Tipo")))
+						.data(LocalDate.parse(result.getString("Data"), DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+						.ora(LocalTime.parse(result.getString("Ora"), DateTimeFormatter.ofPattern("HH:mm")))
+						.stato(Enums.Stato.getFromString(result.getString("Stato"))).macchinario(result.getString("Macchinario"))
+						.ambulatorio(result.getString("Ambulatorio")).build();
 
 				array.add(Pr);
 			}

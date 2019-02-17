@@ -10,6 +10,11 @@ import util.Enums.Sesso;
 public class DottoreImpl extends PersonaImpl.Builder implements Dottore, Serializable {
 
 	private static final long serialVersionUID = 1259675923576837038L;
+	private final String nome;
+	private final String cognome;
+	private final Sesso sesso;
+	private final String luogonascita;
+	private final LocalDate datanascita;
 	private final int tesserino;
 	private final Ruolo ruolo;
 	private final LocalTime orarioinizio;
@@ -18,6 +23,11 @@ public class DottoreImpl extends PersonaImpl.Builder implements Dottore, Seriali
 	public DottoreImpl(final String nome, final String cognome, final Sesso sesso, final String luogonascita,
 			final LocalDate datanascita, final int tesserino, final Ruolo ruolo, final LocalTime orarioinizio,
 			final LocalTime orariofine) {
+		this.nome = nome;
+		this.cognome = cognome;
+		this.sesso = sesso;
+		this.luogonascita = luogonascita;
+		this.datanascita = datanascita;
 		this.tesserino = tesserino;
 		this.ruolo = ruolo;
 		this.orarioinizio = orarioinizio;
@@ -108,34 +118,29 @@ public class DottoreImpl extends PersonaImpl.Builder implements Dottore, Seriali
 	public LocalTime getOrarioFine() {
 		return this.orariofine;
 	}
-
-	@Override
-	public String toString() {
-		return this.ruolo + ", " + this.orarioinizio.toString() + ", " + this.orariofine.toString();
-	}
-
+	
 	@Override
 	public String getNome() {
-		return this.getNome();
+		return this.nome;
 	}
 
 	@Override
 	public String getCognome() {
-		return this.getCognome();
+		return this.cognome;
 	}
 
 	@Override
 	public String getSesso() {
-		return this.getSesso();
+		return this.sesso.toString();
 	}
 
 	@Override
 	public String getLuogoNascita() {
-		return this.getLuogoNascita();
+		return this.luogonascita;
 	}
 
 	@Override
 	public LocalDate getDataNascita() {
-		return this.getDataNascita();
+		return this.datanascita;
 	}
 }

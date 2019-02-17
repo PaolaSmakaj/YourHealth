@@ -13,7 +13,6 @@ public class Database {
 			String password = "password";
 
 			Connection conn = DriverManager.getConnection(url, username, password);
-			System.out.println("Connected");
 			return conn;
 
 		} catch (Exception e) {

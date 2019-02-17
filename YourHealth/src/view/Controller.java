@@ -20,11 +20,18 @@ public class Controller implements ActionListener {
 			break;
 		case "Rimuovi prestazione":
 			new RemovePerformanceForm();
+			break;
+		case "Lista pazienti":
+			new Patients();
+			break;
 		case "Aggiungi paziente":
 			new AddPatientForm();
 			break;
 		case "Rimuovi paziente":
 			new RemovePatientForm();
+			break;
+		case "Lista dottori":
+			new Doctors();
 			break;
 		case "Aggiungi dottore":
 			new AddDocForm();
@@ -32,14 +39,23 @@ public class Controller implements ActionListener {
 		case "Rimuovi dottore":
 			new RemoveDocForm();
 			break;
+		case "Lista macchinari":
+			new Machines();
+			break;
 		case "Aggiungi macchinario":
 			new AddMachForm();
 			break;
 		case "Rimuovi macchinario":
 			new RemoveMachForm();
 			break;
+		case "Lista ambulatori":
+			new Ambulatori();
+			break;
 		case "Aggiungi ambulatorio":
 			new AddAmbForm();
+			break;
+		case "Rimuovi ambulatorio":
+			new RemoveAmbForm();
 			break;
 		}
 	}

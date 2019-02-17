@@ -1,63 +1,55 @@
 package view;
+
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 import controller.Admin;
-import model.Prestazione;
+import model.Dottore;
 
-public class Performances extends JFrame{
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -7033684337462412628L;
-    private static final int NUM_COLS_PERFORMANCES = 8;
-    private javax.swing.JScrollPane jScrollPane1;
+public class Doctors extends JFrame {
+	private static final long serialVersionUID = 5017850607569914173L;
+	private static final int NUM_COLS_DOCTORS = 9;
+	private javax.swing.JScrollPane jScrollPane1;
 	private javax.swing.JTable jTable1;
-	
-	public Performances() {
 
-		
-        try {
-			ArrayList<Prestazione> list = Admin.getListaPrestazioni();
-	        
+	public Doctors() {
+
+		try {
+			ArrayList<Dottore> list = Admin.getListaDottori();
+
 			initComponents();
 			DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-	        addRowToPerformanceTable(model, list);
-	        
-	        this.setVisible(true);
-	        
+			addRowToPerformanceTable(model, list);
+
+			this.setVisible(true);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-        
+
 	}
-	
-	
-	
-	public void addRowToPerformanceTable(DefaultTableModel model, ArrayList<Prestazione> list)
-    {     
-        Object rowData[] = new Object[NUM_COLS_PERFORMANCES];
-        for(int i = 0; i < list.size(); i++)
-        {
-            rowData[0] = list.get(i).getPaziente();
-            rowData[1] = list.get(i).getDottore();
-            rowData[2] = list.get(i).getTipo();
-            rowData[3] = list.get(i).getData();
-            rowData[4] = list.get(i).getOra();
-            rowData[5] = list.get(i).getStato();
-            rowData[6] = list.get(i).getMacchinario();
-            rowData[7] = list.get(i).getAmbulatorio();
-            model.addRow(rowData);
-        }
-                
-    }
-	
-	
+
+	public void addRowToPerformanceTable(DefaultTableModel model, ArrayList<Dottore> list) {
+		Object rowData[] = new Object[NUM_COLS_DOCTORS];
+		for (int i = 0; i < list.size(); i++) {
+			rowData[0] = list.get(i).getNome();
+			rowData[1] = list.get(i).getCognome();
+			rowData[2] = list.get(i).getSesso();
+			rowData[3] = list.get(i).getLuogoNascita();
+			rowData[4] = list.get(i).getDataNascita();
+			rowData[5] = list.get(i).getTesserino();
+			rowData[6] = list.get(i).getRuolo();
+			rowData[7] = list.get(i).getOrarioInizio();
+			rowData[8] = list.get(i).getOrarioFine();
+			model.addRow(rowData);
+		}
+
+	}
+
 	private void initComponents() {
-		
+
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTable1 = new javax.swing.JTable();
 
@@ -65,7 +57,7 @@ public class Performances extends JFrame{
 
 		jTable1.setModel(new javax.swing.table.DefaultTableModel(new Object[][] {
 
-		}, new String[] { "Paziente", "Dottore", "Tipo", "Data", "Ora", "Stato", "Macchinario", "Ambulatorio" }));
+		}, new String[] { "Nome", "Cognome", "Sesso", "LuogoNascita", "DataNascita", "Tesserino", "Ruolo", "OrarioInizio", "OrarioFine" }));
 		jScrollPane1.setViewportView(jTable1);
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
