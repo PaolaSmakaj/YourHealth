@@ -2,6 +2,9 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,15 +25,14 @@ public class LoginForm extends JFrame implements ActionListener{
 	private static JButton btn1;
 	private static JPasswordField p1;
 	
-	//Image bgImage = Toolkit.getDefaultToolkit().getImage("")
+	private Image img;
 
 	JFrame frame = new JFrame("Accedi a YourHealth");
 
 	public LoginForm() {
-
 		
-		//ImageIcon ok = new ImageIcon();
-
+		img = Toolkit.getDefaultToolkit().createImage("C:\\Users\\Università\\Desktop\\YourHealth\\bg.png");
+		
 		l1 = new JLabel("Accedi");
 		l1.setFont(new Font("Calibri", Font.BOLD,18));
 
@@ -97,8 +99,15 @@ public class LoginForm extends JFrame implements ActionListener{
 					"Errore",JOptionPane.ERROR_MESSAGE); 
 		}
 	}
+	
+	public void paintComponent(Graphics g) {
+		g.drawImage(img, 0, 0, null);
+
+	}
+	
 
 	/*public static void main(String[] args){
 		new LoginForm();
 	}*/
 }
+

@@ -11,10 +11,12 @@ public class ControllerPatient implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getActionCommand().equals("Lista prestazioni")){
-			}
-		else if (ae.getActionCommand().equals("Profilo")){
-	  }
-		
+		switch (ae.getActionCommand()) {
+		case "Lista prestazioni":
+			break;
+		case "Profilo":
+			break;
+			
+		}
 	}
 }
