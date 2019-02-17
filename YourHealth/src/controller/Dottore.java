@@ -25,12 +25,12 @@ public class Dottore {
 			ArrayList<Prestazione> array = new ArrayList<Prestazione>();
 			while (result.next()) {
 
-				Prestazione Pr = new PrestazioneImpl.Builder().paziente(result.getString(1)).dottore(result.getInt(2))
-						.tipoprestazione(Enums.TipoPrestazione.getFromString(result.getString(3)))
-						.data(LocalDate.parse(result.getString(4), DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-						.ora(LocalTime.parse(result.getString(5), DateTimeFormatter.ofPattern("HH:mm")))
-						.stato(Enums.Stato.getFromString(result.getString(6))).macchinario(result.getString(7))
-						.ambulatorio(result.getString(8)).build();
+				Prestazione Pr = new PrestazioneImpl.Builder().paziente(result.getString("CF_Paziente")).dottore(result.getInt("ID_Dottore"))
+						.tipoprestazione(Enums.TipoPrestazione.getFromString(result.getString("Tipo")))
+						.data(LocalDate.parse(result.getString("Data"), DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+						.ora(LocalTime.parse(result.getString("Ora"), DateTimeFormatter.ofPattern("HH:mm")))
+						.stato(Enums.Stato.getFromString(result.getString("Stato"))).macchinario(result.getString("Macchinario"))
+						.ambulatorio(result.getString("Ambulatorio")).build();
 
 				array.add(Pr);
 			}

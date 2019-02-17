@@ -21,6 +21,7 @@ public class Performances extends JFrame{
 
 		
         try {
+        	
 			ArrayList<Prestazione> list = Admin.getListaPrestazioni();
 	        
 			initComponents();

@@ -297,10 +297,10 @@ public class Admin {
 
 			ResultSet result = statement.executeQuery();
 
-			Paziente P = new PazienteImpl(result.getString(1), result.getString(2),
-					Enums.Sesso.getFromString(result.getString(3)), result.getString(4),
-					LocalDate.parse(result.getString(5), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-					result.getString(6), result.getString(7));
+			Paziente P = new PazienteImpl(result.getString("Nome"), result.getString("Cognome"),
+					Enums.Sesso.getFromString(result.getString("Sesso")), result.getString("LuogoNascita"),
+					LocalDate.parse(result.getString("DataNascita"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+					result.getString("Codicefiscale"), result.getString("Residenza"));
 			return P;
 
 		} catch (Exception e) {
@@ -317,12 +317,12 @@ public class Admin {
 
 			ResultSet result = statement.executeQuery();
 
-			Dottore D = new DottoreImpl(result.getString(1), result.getString(2),
-					Enums.Sesso.getFromString(result.getString(3)), result.getString(4),
-					LocalDate.parse(result.getString(5), DateTimeFormatter.ofPattern("yyyy-MM-dd")), result.getInt(6),
-					Enums.Ruolo.getFromString(result.getString(7)),
-					LocalTime.parse(result.getString(8), DateTimeFormatter.ofPattern("HH:mm")),
-					LocalTime.parse(result.getString(9), DateTimeFormatter.ofPattern("HH:mm")));
+			Dottore D = new DottoreImpl(result.getString("Nome"), result.getString("Cognome"),
+					Enums.Sesso.getFromString(result.getString("Sesso")), result.getString("LuogoNascita"),
+					LocalDate.parse(result.getString("DataNascita"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+					result.getInt("Tesserino"), Enums.Ruolo.getFromString(result.getString("Ruolo")),
+					LocalTime.parse(result.getString("OrarioInizio"), DateTimeFormatter.ofPattern("HH:mm")),
+					LocalTime.parse(result.getString("OrarioFine"), DateTimeFormatter.ofPattern("HH:mm")));
 			return D;
 
 		} catch (Exception e) {
