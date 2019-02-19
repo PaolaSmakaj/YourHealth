@@ -43,7 +43,7 @@ class LoginForm extends JFrame{
         
         panel1 = new JPanel (new GridLayout());
         
-        admin = factory.createButton("Admin");
+        admin = factory.createButton("Amministratore");
         admin.setBackground(Color.white);
         panel1.add(admin);
 		admin.addActionListener(contr);

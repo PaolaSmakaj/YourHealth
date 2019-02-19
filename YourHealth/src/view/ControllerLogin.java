@@ -12,7 +12,7 @@ public class ControllerLogin implements ActionListener {
 	
 	public void actionPerformed(ActionEvent ae) {
 		switch (ae.getActionCommand()) {
-		case "Admin":
+		case "Amministratore":
 			new AdminForm();
 			break;
 		case "Dottore":

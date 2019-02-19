@@ -1,7 +1,9 @@
 package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,9 +20,9 @@ public class PatientForm extends JFrame implements ActionListener{
 	 * 
 	 */
 	private static final long serialVersionUID = 8666175241640383282L;
-	/**
-	 * 
-	 */
+	private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private int width = (int) screenSize.getWidth();
+    private int height = (int) screenSize.getHeight();
 	
     private GUI fac = new GUIFactory();
     private JTextField textPatID;
@@ -34,6 +36,8 @@ public class PatientForm extends JFrame implements ActionListener{
         frame.setLocationByPlatform(true);
         frame.setLayout(new BorderLayout());
         frame.setTitle("");
+        frame.setResizable(false);
+        frame.setSize(width / 3, height / 3);
 
         JPanel canvas = fac.createBoxPanel();
         frame.add(canvas, BorderLayout.WEST);

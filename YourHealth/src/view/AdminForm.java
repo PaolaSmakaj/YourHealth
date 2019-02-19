@@ -28,6 +28,7 @@ public class AdminForm extends JFrame implements ActionListener{
     private JPasswordField p;
     private final Float font = 20.0f;
     JFrame frame = new JFrame();
+    
     JFrame login = LoginForm.frame;//<--
    
     public AdminForm() {
@@ -36,6 +37,7 @@ public class AdminForm extends JFrame implements ActionListener{
         frame.setLocationByPlatform(true);
         frame.setLayout(new BorderLayout());
         frame.setTitle("");
+        frame.setResizable(false);
 
         JPanel canvas = fac.createBoxPanel();
         frame.add(canvas, BorderLayout.WEST);
@@ -46,7 +48,7 @@ public class AdminForm extends JFrame implements ActionListener{
 
         JLabel label = fac.createLabelRight("Inserisci la password: ", font);
         canvas.add(label);
-        this.p = new JPasswordField(10);
+        this.p = new JPasswordField(25);
         p.setBounds(300, 110, 200, 30);
         canvas2.add(p);
         
@@ -63,7 +65,7 @@ public class AdminForm extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if((Arrays.equals(p.getPassword(), new char[]{'p','a','s','s','w','o','r','d'}))){
+		if((Arrays.equals(p.getPassword(), new char[]{'p','a','s'}))){
 			new Welcome();
 			frame.setVisible(false);
 			login.dispose();//<-- 
