@@ -17,12 +17,6 @@ public interface GUI {
 
     /**
      * @return
-     * returns a JPanel with GridBagLayout.
-     */
-    JPanel createGridBagPanel();
-
-    /**
-     * @return
      * returns a JPanel with FlowLayout.
      */
     JPanel createFlowPanel();
@@ -58,16 +52,6 @@ public interface GUI {
      */
     JLabel createLabelRight(String text, Float font);
 
-    /**
-     * 
-     * @param text
-     * the text of the label
-     * @param font
-     * the font of the label
-     * @return
-     * returns a left-aligned JLabel with given text and font.
-     */
-    JLabel createLabelLeft(String text, Float font);
 
     /**
      * 
@@ -93,12 +77,4 @@ public interface GUI {
      * returns a combo box with the given items in it:
      */
     JComboBox<String> createCombo(String[] string);
-
-    /**
-     * 
-     * @return
-     * returns a separator.
-     */
-    JSeparator createSep();
-
 }

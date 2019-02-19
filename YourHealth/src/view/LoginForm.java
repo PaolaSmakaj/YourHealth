@@ -1,104 +1,73 @@
 package view;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.JPanel;
 
-public class LoginForm extends JFrame implements ActionListener{
+class LoginForm extends JFrame{
+    
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 426996786500293573L;
-	private static JLabel l1, l2, l3;
-	private static JTextField tf1;
-	private static JButton btn1;
-	private static JPasswordField p1;
+	private static final long serialVersionUID = 3401252203616577808L;
+	/**
+	 * 
+	 */
 	
-	//Image bgImage = Toolkit.getDefaultToolkit().getImage("")
+	private static JButton admin, doc, patient;
+	static JFrame frame;
+    private static JPanel mainpanel, panel1;
+    private GUIFactory factory = new GUIFactory();
+	private ControllerLogin contr;
 
-	JFrame frame = new JFrame("Accedi a YourHealth");
 
-	public LoginForm() {
+    public LoginForm() {
+		try {
+			contr = new ControllerLogin(this);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+        frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600, 400);
+        frame.setVisible(true);
+        frame.setTitle("YourHealth");
+        frame.setLayout(new BorderLayout());
 
+        mainpanel = new JPanel (new GridLayout(2,1));
+        frame.add(mainpanel, BorderLayout.CENTER);
+        
+        panel1 = new JPanel (new GridLayout());
+        
+        admin = factory.createButton("Admin");
+        admin.setBackground(Color.white);
+        panel1.add(admin);
+		admin.addActionListener(contr);
+		doc = factory.createButton("Dottore");
+		doc.setBackground(Color.lightGray);
+        panel1.add(doc);
+        doc.addActionListener(contr);
+        patient = factory.createButton("Paziente");
+		patient.setBackground(Color.lightGray);
+        panel1.add(patient);
+        patient.addActionListener(contr);
 		
-		//ImageIcon ok = new ImageIcon();
-
-		l1 = new JLabel("Accedi");
-		l1.setFont(new Font("Calibri", Font.BOLD,18));
-
-		l2 = new JLabel("E-mail");
-		l2.setFont(new Font("Calibri", Font.BOLD,18));
-
-		l3 = new JLabel("Password");
-		l3.setFont(new Font("Calibri", Font.BOLD,18));
-
-		tf1 = new JTextField();
-		p1 = new JPasswordField();
-
-		btn1 = new JButton("Accedi");
-		btn1.setFont(new Font("Calibri", Font.BOLD,18));
-		btn1.setBackground(Color.DARK_GRAY);
-		btn1.setForeground(Color.WHITE);
-
-		l1.setBounds(100, 30, 400, 30);
-		l2.setBounds(80, 70, 200, 30);
-		l3.setBounds(80, 110, 200, 30);
-		tf1.setBounds(300, 70, 200, 30);
-		p1.setBounds(300, 110, 200, 30);
-		btn1.setBounds(150, 160, 100, 30);
-
-		btn1.addActionListener(this);
-
-		frame.add(l1);
-		frame.add(l2);
-		frame.add(tf1);
-		frame.add(l3);
-		frame.add(p1);
-		frame.add(btn1);
-		
-		frame.setSize(600, 300);
-		frame.setLayout(new BorderLayout());
+		mainpanel.add(panel1);
 		frame.setVisible(true);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-	}
-
-	public void actionPerformed(ActionEvent ae){
-
-
-		String uname = tf1.getText();
-		@SuppressWarnings("deprecation")
-		String pass = p1.getText();
-		if(uname.equals("admin") && pass.equals("abc")){
-			new Welcome();
-			//wel.setVisible(true);
-			frame.setVisible(false);
-		}
-		else if (uname.equals("doc@doc.com") && pass.equals("abc@123")){
-			new WelcomeDoc();
-			//weldoc.setVisible(true);
-			frame.setVisible(false);
-		}
-		else if (uname.equals("patient@patient.com") && pass.equals("abc@123")){
-			new WelcomePatient();
-			//welpatient.setVisible(true);
-			frame.setVisible(false);
-		}
-		else {
-			JOptionPane.showMessageDialog(this,"E-mail o password sbagliata",
-					"Errore",JOptionPane.ERROR_MESSAGE); 
-		}
-	}
-
-	/*public static void main(String[] args){
-		new LoginForm();
-	}*/
+		/*panel2= new JPanel();
+        
+        JButton logout = new JButton("Esci");
+        logout.setFont(new Font("Calibri", Font.PLAIN,18));
+        logout.setBackground(Color.darkGray);
+        logout.setForeground(Color.white);
+        panel2.add(logout);
+        logout.addActionListener(this);
+        frame.setVisible(true);
+        
+        mainpanel.add(panel2);*/
+        }
 }

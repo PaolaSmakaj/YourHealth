@@ -11,11 +11,12 @@ public class ControllerDoc implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent ae) {
-		if (ae.getActionCommand().equals("Lista prestazioni")){
+		switch (ae.getActionCommand()) {
+		case "Lista prestazioni":
+			break;
+		case "Profilo":
+			break;
 			
 	  }
-		else if (ae.getActionCommand().equals("Profilo")){
-	  }
-		
 	}
 }

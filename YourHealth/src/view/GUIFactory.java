@@ -31,11 +31,6 @@ public class GUIFactory implements GUI {
         return grid;
     }
 
-    @Override
-    public JPanel createGridBagPanel() {
-        JPanel panel = new JPanel(new GridBagLayout());
-        return panel;
-    }
 
     @Override
     public JButton createButton(final String text) {
@@ -60,13 +55,6 @@ public class GUIFactory implements GUI {
         return label;
     }
 
-    @Override
-    public JLabel createLabelLeft(final String text, final Float font) {
-        JLabel label = new JLabel(text);
-        label.setFont(new Font("Calibri", Font.PLAIN,18));
-        label.setAlignmentX(Component.LEFT_ALIGNMENT);
-        return label;
-    }
 
     @Override
     public JTextField createTextField() {
@@ -90,9 +78,5 @@ public class GUIFactory implements GUI {
         return combo;
     }
 
-    @Override
-    public JSeparator createSep() {
-        return new JSeparator(SwingConstants.HORIZONTAL);
-    }
 
 }
